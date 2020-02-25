@@ -20,5 +20,10 @@
         "psr-4": {
             "RFC5234\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RFC5234\\Test\\": "test/src"
+        }
     }
 }

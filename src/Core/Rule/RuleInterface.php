@@ -8,11 +8,15 @@
 
 namespace RFC5234\Core\Rule;
 
-
+/**
+ * Interface RuleInterface
+ * @package RFC5234\Core\Rule
+ * @internal
+ */
 interface RuleInterface
 {
     /**
-     * Return a pattern match for that rule
+     * Return a pattern that match for that rule
      */
     public static function getPattern(): string;
 }

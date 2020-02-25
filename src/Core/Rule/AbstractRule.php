@@ -12,6 +12,11 @@ namespace RFC5234\Core\Rule;
 use RFC5234\Exception\PatternMatchException;
 use RFC5234\Helper\RegexHelper;
 
+/**
+ * Class AbstractRule
+ * @package RFC5234\Core\Rule
+ * @internal
+ */
 abstract class AbstractRule implements RuleInterface
 {
     private $value;

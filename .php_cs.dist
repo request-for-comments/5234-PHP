@@ -1,0 +1,29 @@
+#!php
+<?php
+
+$author = '@author Marc MOREAU <moreau.marc.web@gmail.com>';
+$license = '@license https://github.com/request-for-comments/5234-PHP/blob/master/LICENSE.md CC-BY-SA-4.0';
+$link = '@link https://github.com/request-for-comments/5234-PHP/blob/master/README.md';
+
+$finder = PhpCsFixer\Finder::create()
+    ->exclude('vendor')
+    ->in(__DIR__)
+;
+
+$config = PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
+    ->setRules([
+        'yoda_style' => true,
+        'final_internal_class' => false,
+        'strict_comparison' => true,
+        'declare_strict_types' => true,
+        'single_line_comment_style' => false,
+        'header_comment' => [
+            'header' => \implode("\n", [$author, $license, $link]),
+            'comment_type' => 'PHPDoc',
+        ],
+    ])
+    ->setFinder($finder)
+;
+
+return $config;

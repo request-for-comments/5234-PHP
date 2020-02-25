@@ -3,11 +3,12 @@
     "description": "Augmented BNF for Syntax Specifications: ABNF",
     "type": "library",
     "require": {
-        "php": ">=7.1",
-        "friendsofphp/php-cs-fixer": "^2.16"
+        "php": ">=7.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^8.5",
+        "phpstan/phpstan": "^0.12.11",
+        "friendsofphp/php-cs-fixer": "^2.16"
     },
     "license": "CC-BY-SA-4.0",
     "authors": [

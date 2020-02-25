@@ -26,14 +26,17 @@ class RegexHelper
 
     public static function prepare(string $pattern): RegexHelper
     {
-        return new static($pattern);
+        return new self($pattern);
     }
 
-    public function pregMatch(string $stringToEvaluate, &$matches = []): bool
+    /**
+     * @param string $stringToEvaluate
+     * @param array|null $matches it will be always initialized like a new empty array
+     * @return bool
+     */
+    public function pregMatch(string $stringToEvaluate, &$matches = null): bool
     {
-        if (!is_array($matches)) {
-            $matches = [];
-        }
+        $matches = [];
 
         return !!preg_match($this->regex, $stringToEvaluate, $matches);
     }

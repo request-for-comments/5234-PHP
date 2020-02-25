@@ -13,6 +13,13 @@ use PHPUnit\Framework\Exception;
 
 class PatternMatchException extends Exception
 {
+    /**
+     * PatternMatchException constructor.
+     * @param string $currentString
+     * @param string $patternToMatch
+     * @param int $code
+     * @param \Throwable|null $previous
+     */
     public function __construct(string $currentString, string $patternToMatch, $code = 0, \Throwable $previous = null)
     {
         $message = sprintf('%s is not matching pattern: %s', $currentString, $patternToMatch);

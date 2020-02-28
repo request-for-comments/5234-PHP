@@ -9,50 +9,45 @@
 namespace RFC5234\Test\Core\Rule;
 
 use PHPUnit\Framework\TestCase;
-use RFC5234\Core\Rule\Char;
+use RFC5234\Core\Rule\CR;
 use RFC5234\Exception\PatternMatchException;
 
-class CharTest extends TestCase
+class CRTest extends TestCase
 {
-    public function test that match with any char__US_ASCII()
+    public function test that match CR()
     {
         foreach (
             [
-                ' ', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/',
-                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?',
-                '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
-                'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_',
-                '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
-                'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~',
+                "\r",
             ] as $char
         ) {
             $exception = null;
             try {
-                new Char($char);
+                new CR($char);
             } catch (PatternMatchException $exception) {
             }
             static::assertNull($exception, $exception->getMessage());
         }
     }
 
-    public function test that not match with any none char__US_ASCII()
+    public function test that not match with any none CR()
     {
         foreach (['é', 'ù', '¡', '°', '§', '£', 'ù', 'µ'] as $none) {
             $exception = null;
             try {
-                new Char($none);
+                new CR($none);
             } catch (PatternMatchException $exception) {
             }
             static::assertInstanceOf(PatternMatchException::class, $exception, $none);
         }
     }
 
-    public function test that not match with any more than once char__US_ASCII()
+    public function test that not match with any more than once CR()
     {
-        foreach (['&&', 'ab', '10', '$+'] as $multiple) {
+        foreach (["\r\r"] as $multiple) {
             $exception = null;
             try {
-                new Char($multiple);
+                new CR($multiple);
             } catch (PatternMatchException $exception) {
             }
             static::assertInstanceOf(PatternMatchException::class, $exception, $multiple);

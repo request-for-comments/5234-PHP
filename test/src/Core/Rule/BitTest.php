@@ -10,42 +10,38 @@ namespace RFC5234\Test\Core\Rule;
 
 use RFC5234\Core\Rule\Alpha;
 use PHPUnit\Framework\TestCase;
+use RFC5234\Core\Rule\Bit;
 use RFC5234\Exception\PatternMatchException;
 
-class AlphaTest extends TestCase
+class BitTest extends TestCase
 {
-    public function test that match with any a to z letter()
+    public function test that match with 0 or 1()
     {
-        foreach (
-            [
-                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-                'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-            ] as $letter
-        ) {
+        foreach (['0', '1',] as $bit) {
             $exception = null;
             try {
-                new Alpha($letter);
+                new Bit($bit);
             } catch (PatternMatchException $exception) {
             }
             static::assertNull($exception);
         }
     }
 
-    public function test that not match with any none a to z letter()
+    public function test that not match with any none 0 or 1()
     {
-        foreach (['é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^'] as $noneLetter) {
+        foreach (['é', 'ù', '!', '4', '¡', '2', '*', 'ù', 'a'] as $noneBit) {
             $exception = null;
             try {
-                new Alpha($noneLetter);
+                new Bit($noneBit);
             } catch (PatternMatchException $exception) {
             }
             static::assertInstanceOf(PatternMatchException::class, $exception);
         }
     }
 
-    public function test that not match with any more than once a to z letter()
+    public function test that not match with any more than once 0 or 1()
     {
-        foreach (['aa', 'ab', 'abc'] as $multipleLetter) {
+        foreach (['00', '01', '10', '11'] as $multipleLetter) {
             $exception = null;
             try {
                 new Alpha($multipleLetter);

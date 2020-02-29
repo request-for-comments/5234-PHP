@@ -13,17 +13,17 @@ use RFC5234\Test\AbstractRuleTestCase;
 
 class CRTest extends AbstractRuleTestCase
 {
-    public static function setUpBeforeClass(): void
+    public function setUp(): void
     {
-        parent::setUpBeforeClass();
-        static::$testedRule = CR::class;
-        static::$goodValueSet = [
+        parent::setUp();
+        $this->testedRule = CR::class;
+        $this->goodValueSet = [
             "\r",
         ];
-        static::$badValueSet = [
+        $this->badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
         ];
-        static::$moreThanOneGoodIsBadSet = [
+        $this->moreThanOneGoodIsBadSet = [
             "\r\r",
         ];
     }

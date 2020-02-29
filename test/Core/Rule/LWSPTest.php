@@ -8,32 +8,31 @@
 
 namespace RFC5234\Test\Core\Rule;
 
-use RFC5234\Core\Rule\Octet;
+use RFC5234\Core\Rule\LWSP;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class OctetTest extends AbstractRuleTestCase
+class LWSPTest extends AbstractRuleTestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->testedRule = Octet::class;
-        $this->goodValueSet = (function () {
+        ($wt = new WSPTest())->setUp();
+        ($ct = new CRLFTest())->setUp();
+        $this->testedRule = LWSP::class;
+        $this->goodValueSet = array_merge($wt->goodValueSet, (function () use ($wt, $ct) {
             $set = [];
-            $run = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
 
-            foreach ($run as $first) {
-                foreach ($run as $last) {
-                    $set[] = pack('H*', $first.$last);
+            foreach ($ct->goodValueSet as $c) {
+                foreach ($wt->goodValueSet as $w) {
+                    $set[] = $c.$w;
                 }
             }
 
             return $set;
-        })();
+        })());
         $this->badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
         ];
-        $this->moreThanOneGoodIsBadSet = [
-            "\x00\x00", "\xFF\x00", "\x01\xA1\x5F",
-        ];
+        $this->moreThanOneGoodIsBadSet = null;
     }
 }

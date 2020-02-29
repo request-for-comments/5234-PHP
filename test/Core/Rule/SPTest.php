@@ -13,17 +13,17 @@ use RFC5234\Test\AbstractRuleTestCase;
 
 class SPTest extends AbstractRuleTestCase
 {
-    public static function setUpBeforeClass(): void
+    public function setUp(): void
     {
-        parent::setUpBeforeClass();
-        static::$testedRule = SP::class;
-        static::$goodValueSet = [
+        parent::setUp();
+        $this->testedRule = SP::class;
+        $this->goodValueSet = [
             " ",
         ];
-        static::$badValueSet = [
+        $this->badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ', 'a', '3'
         ];
-        static::$moreThanOneGoodIsBadSet = [
+        $this->moreThanOneGoodIsBadSet = [
             "  ",
         ];
     }

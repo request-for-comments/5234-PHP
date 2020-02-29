@@ -13,21 +13,17 @@ use RFC5234\Test\AbstractRuleTestCase;
 
 class WSPTest extends AbstractRuleTestCase
 {
-    public static function setUpBeforeClass(): void
+    public function setUp(): void
     {
-        $dt = new SPTest();
-        $dt::setUpBeforeClass();
-        $dtGV = $dt::$goodValueSet;
-        $ht = new HTabTest();
-        $ht::setUpBeforeClass();
-        $htGV = $ht::$goodValueSet;
-        parent::setUpBeforeClass();
-        static::$testedRule = WSP::class;
-        static::$goodValueSet = array_merge($dtGV, $htGV);
-        static::$badValueSet = [
+        parent::setUp();
+        ($dt = new SPTest())->setUp();
+        ($ht = new HTabTest())->setUp();
+        $this->testedRule = WSP::class;
+        $this->goodValueSet = array_merge($dt->goodValueSet, $ht->goodValueSet);
+        $this->badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
         ];
-        static::$moreThanOneGoodIsBadSet = [
+        $this->moreThanOneGoodIsBadSet = [
             " \t", "   ", "\t\t\t\t", " \t \t",
         ];
     }

@@ -13,17 +13,17 @@ use RFC5234\Test\AbstractRuleTestCase;
 
 class DigitTest extends AbstractRuleTestCase
 {
-    public static function setUpBeforeClass(): void
+    public function setUp(): void
     {
-        parent::setUpBeforeClass();
-        static::$testedRule = Digit::class;
-        static::$goodValueSet = [
+        parent::setUp();
+        $this->testedRule = Digit::class;
+        $this->goodValueSet = [
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
         ];
-        static::$badValueSet = [
+        $this->badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
         ];
-        static::$moreThanOneGoodIsBadSet = [
+        $this->moreThanOneGoodIsBadSet = [
             '00', '11', '472', '327', '427', '75', '276', '2397', '800', '009',
         ];
     }

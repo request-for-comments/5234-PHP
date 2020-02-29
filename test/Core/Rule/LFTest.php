@@ -13,17 +13,17 @@ use RFC5234\Test\AbstractRuleTestCase;
 
 class LFTest extends AbstractRuleTestCase
 {
-    public static function setUpBeforeClass(): void
+    public function setUp(): void
     {
-        parent::setUpBeforeClass();
-        static::$testedRule = LF::class;
-        static::$goodValueSet = [
+        parent::setUp();
+        $this->testedRule = LF::class;
+        $this->goodValueSet = [
             "\n",
         ];
-        static::$badValueSet = [
+        $this->badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ', 'a', '3', "\t", ' '
         ];
-        static::$moreThanOneGoodIsBadSet = [
+        $this->moreThanOneGoodIsBadSet = [
             "\n\n\n\n\n",
             "\n\n\n\n",
             "\n\n\n",

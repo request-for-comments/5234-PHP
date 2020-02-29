@@ -14,19 +14,19 @@ use RFC5234\Exception\PatternMatchException;
 
 class AbstractRuleTestCase extends TestCase
 {
-    protected static $testedRule;
-    protected static $goodValueSet = [];
-    protected static $badValueSet = [];
-    protected static $moreThanOneGoodIsBadSet = [];
+    protected $testedRule;
+    protected $goodValueSet = [];
+    protected $badValueSet = [];
+    protected $moreThanOneGoodIsBadSet = [];
 
     public function test that match with any good value()
     {
-        foreach (static::$goodValueSet as $good
+        foreach ($this->goodValueSet as $good
         ) {
             $exception = null;
             $message = '';
             try {
-                new static::$testedRule($good);
+                new $this->testedRule($good);
             } catch (PatternMatchException $exception) {
                 $message = $exception->getMessage();
             }
@@ -36,32 +36,36 @@ class AbstractRuleTestCase extends TestCase
 
     public function test that not match with any bad value()
     {
-        foreach (static::$badValueSet as $bad) {
+        foreach ($this->badValueSet as $bad) {
             $exception = null;
             try {
-                new static::$testedRule($bad);
+                new $this->testedRule($bad);
             } catch (PatternMatchException $exception) {
             }
             static::assertInstanceOf(
                 PatternMatchException::class,
                 $exception,
-                sprintf('`%s` seems to be a good value for %s', $bad, static::$testedRule)
+                sprintf('`%s` seems to be a good value for %s', $bad, $this->testedRule)
             );
         }
     }
 
     public function test that not match with any more than one good value()
     {
-        foreach (static::$moreThanOneGoodIsBadSet as $multiple) {
+        if (is_null($this->moreThanOneGoodIsBadSet)) {
+            static::assertTrue(true);
+            return;
+        }
+        foreach ($this->moreThanOneGoodIsBadSet as $multiple) {
             $exception = null;
             try {
-                new static::$testedRule($multiple);
+                new $this->testedRule($multiple);
             } catch (PatternMatchException $exception) {
             }
             static::assertInstanceOf(
                 PatternMatchException::class,
                 $exception,
-                sprintf('`%s` seems to be a good multiple value for %s', $multiple, static::$testedRule)
+                sprintf('`%s` seems to be a good multiple value for %s', $multiple, $this->testedRule)
             );
         }
     }

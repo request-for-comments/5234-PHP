@@ -13,17 +13,17 @@ use RFC5234\Test\AbstractRuleTestCase;
 
 class DQuoteTest extends AbstractRuleTestCase
 {
-    public static function setUpBeforeClass(): void
+    public function setUp(): void
     {
-        parent::setUpBeforeClass();
-        static::$testedRule = DQuote::class;
-        static::$goodValueSet = [
+        parent::setUp();
+        $this->testedRule = DQuote::class;
+        $this->goodValueSet = [
             '"',
         ];
-        static::$badValueSet = [
+        $this->badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ', 'a', 'b', '0', '1'
         ];
-        static::$moreThanOneGoodIsBadSet = [
+        $this->moreThanOneGoodIsBadSet = [
             '""',
         ];
     }

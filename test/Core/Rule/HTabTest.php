@@ -13,17 +13,17 @@ use RFC5234\Test\AbstractRuleTestCase;
 
 class HTabTest extends AbstractRuleTestCase
 {
-    public static function setUpBeforeClass(): void
+    public function setUp(): void
     {
-        parent::setUpBeforeClass();
-        static::$testedRule = HTab::class;
-        static::$goodValueSet = [
+        parent::setUp();
+        $this->testedRule = HTab::class;
+        $this->goodValueSet = [
             "\t",
         ];
-        static::$badValueSet = [
+        $this->badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ', 'a', '3'
         ];
-        static::$moreThanOneGoodIsBadSet = [
+        $this->moreThanOneGoodIsBadSet = [
             "\t\t",
         ];
     }

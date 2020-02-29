@@ -13,18 +13,18 @@ use RFC5234\Test\AbstractRuleTestCase;
 
 class AlphaTest extends AbstractRuleTestCase
 {
-    public static function setUpBeforeClass(): void
+    public function setUp(): void
     {
-        parent::setUpBeforeClass();
-        static::$testedRule = Alpha::class;
-        static::$goodValueSet = [
+        parent::setUp();
+        $this->testedRule = Alpha::class;
+        $this->goodValueSet = [
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
             'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         ];
-        static::$badValueSet = [
+        $this->badValueSet = [
             'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^'
         ];
-        static::$moreThanOneGoodIsBadSet = [
+        $this->moreThanOneGoodIsBadSet = [
             'aa', 'ab', 'abc'
         ];
     }

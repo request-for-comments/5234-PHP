@@ -13,19 +13,18 @@ use RFC5234\Test\AbstractRuleTestCase;
 
 class HexDigTest extends AbstractRuleTestCase
 {
-    public static function setUpBeforeClass(): void
+    public function setUp(): void
     {
-        $dt = new DigitTest();
-        $dt::setUpBeforeClass();
-        parent::setUpBeforeClass();
-        static::$testedRule = HexDig::class;
-        static::$goodValueSet = array_merge($dt::$goodValueSet, [
+        parent::setUp();
+        ($dt = new DigitTest())->setUp();
+        $this->testedRule = HexDig::class;
+        $this->goodValueSet = array_merge($dt->goodValueSet, [
             'A', 'B', 'C', 'D', 'E', 'F',
         ]);
-        static::$badValueSet = [
+        $this->badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
         ];
-        static::$moreThanOneGoodIsBadSet = [
+        $this->moreThanOneGoodIsBadSet = [
             '01', '1A', 'FF', '0A', 'BDF',
         ];
     }

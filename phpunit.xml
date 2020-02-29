@@ -26,8 +26,8 @@
         verbose="false"
 >
     <testsuites>
-        <testsuite name="core-rules">
-            <directory>test/src/Core/Rule</directory>
+        <testsuite name="global">
+            <directory>test</directory>
         </testsuite>
     </testsuites>
 

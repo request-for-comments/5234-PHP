@@ -8,23 +8,23 @@
 
 namespace RFC5234\Test\Core\Rule;
 
-use RFC5234\Core\Rule\CR;
+use RFC5234\Core\Rule\CRLF;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class CRTest extends AbstractRuleTestCase
+class CRLFTest extends AbstractRuleTestCase
 {
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
-        static::$testedRule = CR::class;
+        static::$testedRule = CRLF::class;
         static::$goodValueSet = [
-            "\r",
+            "\r\n"
         ];
         static::$badValueSet = [
-            'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
+            'a', 'b', 'c', '{', ';', '^', 'j',
         ];
         static::$moreThanOnceGoodSet = [
-            "\r\r",
+            "\r\n\r\n"
         ];
     }
 }

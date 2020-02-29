@@ -8,23 +8,23 @@
 
 namespace RFC5234\Test\Core\Rule;
 
-use RFC5234\Core\Rule\CR;
+use RFC5234\Core\Rule\Digit;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class CRTest extends AbstractRuleTestCase
+class DigitTest extends AbstractRuleTestCase
 {
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
-        static::$testedRule = CR::class;
+        static::$testedRule = Digit::class;
         static::$goodValueSet = [
-            "\r",
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
         ];
         static::$badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
         ];
         static::$moreThanOnceGoodSet = [
-            "\r\r",
+            '00', '11', '472', '327', '427', '75', '276', '2397', '800', '009',
         ];
     }
 }

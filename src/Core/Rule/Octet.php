@@ -13,6 +13,6 @@ class Octet extends AbstractRule
 {
     public static function getPattern(): string
     {
-        return '[\x00-x\FF]';
+        return '[\x00-\xFF]';
     }
 }

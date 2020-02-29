@@ -23,7 +23,7 @@ class CRLFTest extends AbstractRuleTestCase
         static::$badValueSet = [
             'a', 'b', 'c', '{', ';', '^', 'j',
         ];
-        static::$moreThanOnceGoodSet = [
+        static::$moreThanOneGoodIsBadSet = [
             "\r\n\r\n"
         ];
     }

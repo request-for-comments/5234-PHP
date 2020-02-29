@@ -8,23 +8,23 @@
 
 namespace RFC5234\Test\Core\Rule;
 
-use RFC5234\Core\Rule\Bit;
+use RFC5234\Core\Rule\SP;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class BitTest extends AbstractRuleTestCase
+class SPTest extends AbstractRuleTestCase
 {
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
-        static::$testedRule = Bit::class;
+        static::$testedRule = SP::class;
         static::$goodValueSet = [
-            '0', '1',
+            " ",
         ];
         static::$badValueSet = [
-            'é', 'ù', '!', '4', '¡', '2', '*', 'ù', 'a'
+            'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ', 'a', '3'
         ];
         static::$moreThanOneGoodIsBadSet = [
-            '00', '01', '10', '11'
+            "  ",
         ];
     }
 }

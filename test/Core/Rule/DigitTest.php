@@ -23,7 +23,7 @@ class DigitTest extends AbstractRuleTestCase
         static::$badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
         ];
-        static::$moreThanOnceGoodSet = [
+        static::$moreThanOneGoodIsBadSet = [
             '00', '11', '472', '327', '427', '75', '276', '2397', '800', '009',
         ];
     }

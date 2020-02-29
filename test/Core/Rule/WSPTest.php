@@ -8,23 +8,27 @@
 
 namespace RFC5234\Test\Core\Rule;
 
-use RFC5234\Core\Rule\Bit;
+use RFC5234\Core\Rule\WSP;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class BitTest extends AbstractRuleTestCase
+class WSPTest extends AbstractRuleTestCase
 {
     public static function setUpBeforeClass(): void
     {
+        $dt = new SPTest();
+        $dt::setUpBeforeClass();
+        $dtGV = $dt::$goodValueSet;
+        $ht = new HTabTest();
+        $ht::setUpBeforeClass();
+        $htGV = $ht::$goodValueSet;
         parent::setUpBeforeClass();
-        static::$testedRule = Bit::class;
-        static::$goodValueSet = [
-            '0', '1',
-        ];
+        static::$testedRule = WSP::class;
+        static::$goodValueSet = array_merge($dtGV, $htGV);
         static::$badValueSet = [
-            'é', 'ù', '!', '4', '¡', '2', '*', 'ù', 'a'
+            'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
         ];
         static::$moreThanOneGoodIsBadSet = [
-            '00', '01', '10', '11'
+            " \t", "   ", "\t\t\t\t", " \t \t",
         ];
     }
 }

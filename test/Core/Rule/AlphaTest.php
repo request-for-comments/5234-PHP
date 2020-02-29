@@ -24,7 +24,7 @@ class AlphaTest extends AbstractRuleTestCase
         static::$badValueSet = [
             'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^'
         ];
-        static::$moreThanOnceGoodSet = [
+        static::$moreThanOneGoodIsBadSet = [
             'aa', 'ab', 'abc'
         ];
     }

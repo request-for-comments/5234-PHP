@@ -8,23 +8,25 @@
 
 namespace RFC5234\Test\Core\Rule;
 
-use RFC5234\Core\Rule\Bit;
+use RFC5234\Core\Rule\HexDig;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class BitTest extends AbstractRuleTestCase
+class HexDigTest extends AbstractRuleTestCase
 {
     public static function setUpBeforeClass(): void
     {
+        $dt = new DigitTest();
+        $dt::setUpBeforeClass();
         parent::setUpBeforeClass();
-        static::$testedRule = Bit::class;
-        static::$goodValueSet = [
-            '0', '1',
-        ];
+        static::$testedRule = HexDig::class;
+        static::$goodValueSet = array_merge($dt::$goodValueSet, [
+            'A', 'B', 'C', 'D', 'E', 'F',
+        ]);
         static::$badValueSet = [
-            'é', 'ù', '!', '4', '¡', '2', '*', 'ù', 'a'
+            'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
         ];
         static::$moreThanOneGoodIsBadSet = [
-            '00', '01', '10', '11'
+            '01', '1A', 'FF', '0A', 'BDF',
         ];
     }
 }

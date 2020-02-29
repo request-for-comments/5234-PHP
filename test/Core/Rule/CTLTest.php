@@ -27,7 +27,7 @@ class CTLTest extends AbstractRuleTestCase
         static::$badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
         ];
-        static::$moreThanOnceGoodSet = [
+        static::$moreThanOneGoodIsBadSet = [
             "\x1A\x1F", "\x1A\x1F\x02", "\x0B\x1C",
         ];
     }

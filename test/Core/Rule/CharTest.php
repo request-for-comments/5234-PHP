@@ -28,7 +28,7 @@ class CharTest extends AbstractRuleTestCase
         static::$badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ'
         ];
-        static::$moreThanOnceGoodSet = [
+        static::$moreThanOneGoodIsBadSet = [
             '&&', 'ab', '10', '$+'
         ];
     }

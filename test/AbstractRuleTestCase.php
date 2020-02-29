@@ -17,7 +17,7 @@ class AbstractRuleTestCase extends TestCase
     protected static $testedRule;
     protected static $goodValueSet = [];
     protected static $badValueSet = [];
-    protected static $moreThanOnceGoodSet = [];
+    protected static $moreThanOneGoodIsBadSet = [];
 
     public function test that match with any good value()
     {
@@ -42,19 +42,27 @@ class AbstractRuleTestCase extends TestCase
                 new static::$testedRule($bad);
             } catch (PatternMatchException $exception) {
             }
-            static::assertInstanceOf(PatternMatchException::class, $exception, sprintf('`%s` seems to be a good value', $bad));
+            static::assertInstanceOf(
+                PatternMatchException::class,
+                $exception,
+                sprintf('`%s` seems to be a good value for %s', $bad, static::$testedRule)
+            );
         }
     }
 
-    public function test that not match with any more than once good value()
+    public function test that not match with any more than one good value()
     {
-        foreach (static::$moreThanOnceGoodSet as $multiple) {
+        foreach (static::$moreThanOneGoodIsBadSet as $multiple) {
             $exception = null;
             try {
                 new static::$testedRule($multiple);
             } catch (PatternMatchException $exception) {
             }
-            static::assertInstanceOf(PatternMatchException::class, $exception, $multiple);
+            static::assertInstanceOf(
+                PatternMatchException::class,
+                $exception,
+                sprintf('`%s` seems to be a good multiple value for %s', $multiple, static::$testedRule)
+            );
         }
     }
 }

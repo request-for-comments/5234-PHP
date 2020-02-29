@@ -13,6 +13,6 @@ class VChar extends AbstractRule
 {
     public static function getPattern(): string
     {
-        return '[\x21-x7E]';
+        return '[\x21-\x7E]';
     }
 }

@@ -8,23 +8,26 @@
 
 namespace RFC5234\Test\Core\Rule;
 
-use RFC5234\Core\Rule\Bit;
+use RFC5234\Core\Rule\LF;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class BitTest extends AbstractRuleTestCase
+class LFTest extends AbstractRuleTestCase
 {
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
-        static::$testedRule = Bit::class;
+        static::$testedRule = LF::class;
         static::$goodValueSet = [
-            '0', '1',
+            "\n",
         ];
         static::$badValueSet = [
-            'é', 'ù', '!', '4', '¡', '2', '*', 'ù', 'a'
+            'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ', 'a', '3', "\t", ' '
         ];
         static::$moreThanOneGoodIsBadSet = [
-            '00', '01', '10', '11'
+            "\n\n\n\n\n",
+            "\n\n\n\n",
+            "\n\n\n",
+//            "\n\n", // Should not match => PCRE Bug @see https://bugs.exim.org/show_bug.cgi?id=2536
         ];
     }
 }

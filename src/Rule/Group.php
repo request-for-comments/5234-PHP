@@ -6,21 +6,20 @@ namespace RFC5234\Rule;
 
 use RFC5234\Core\Rule\AbstractRule;
 
-class Repetition extends AbstractRule
+class Group extends AbstractRule
 {
-    /** @var bool */
-    protected static $alreadyCalled;
+    protected static $alreadyCalled = false;
 
     public static function getPattern(): string
     {
         if (!static::$alreadyCalled) {
             static::$alreadyCalled = true;
-            $regex = "(?'repetition'" . Repeat::getPattern() . '?' . Element::getPattern() . ')';
+            $regex = "(?'group'\(" . CWSP::getPattern() . '*' . Alternation::getPattern() . CWSP::getPattern() . '*\))';
             static::$alreadyCalled = false;
 
             return $regex;
         }
 
-        return "(?:\g'repetition')";
+        return "(?:\g'group')";
     }
 }

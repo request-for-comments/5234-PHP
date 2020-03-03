@@ -4,20 +4,18 @@
 namespace RFC5234\Rule;
 
 
-use RFC5234\Core\Rule\AbstractRule;
+use RFC5234\Core\Rule\AbstractRuleTraceable;
 
-class Alternation extends AbstractRule
+class Alternation extends AbstractRuleTraceable
 {
-    protected static $alreadyCalled;
-
     public static function getPattern(): string
     {
-        if (!static::$alreadyCalled) {
-            static::$alreadyCalled = true;
+        if (!static::isAlreadyCalled()) {
+            static::traceCallOnce();
             $regex = "(?'alternation'" . Repetition::getPattern() . '(?:' . CWSP::getPattern() . '+' .
                 Repetition::getPattern() . ')*)'
             ;
-            static::$alreadyCalled = false;
+            static::unTrace();
 
             return $regex;
         }

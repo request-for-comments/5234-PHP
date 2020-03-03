@@ -4,12 +4,20 @@
 namespace RFC5234\Rule;
 
 
-use RFC5234\Core\Rule\AbstractRule;
+use RFC5234\Core\Rule\AbstractRuleTraceable;
 
-class Concatenation extends AbstractRule
+class Concatenation extends AbstractRuleTraceable
 {
     public static function getPattern(): string
     {
-        return '(?;' . Concatenation::getPattern() . '(?:' . CWSP::getPattern() . '*/' . CWSP::getPattern() . '*' . Concatenation::getPattern() . ')*)';
+        if (!static::isAlreadyCalled()) {
+            static::traceCallOnce();
+            $regex = "(?'concatenation'" . Repetition::getPattern() . '(?:' . CWSP::getPattern() . '+' . Repetition::getPattern() . ')*)';
+            static::unTrace();
+
+            return $regex;
+        }
+
+        return "(?:\g'concatenation')";
     }
 }

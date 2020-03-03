@@ -4,19 +4,16 @@
 namespace RFC5234\Rule;
 
 
-use RFC5234\Core\Rule\AbstractRule;
+use RFC5234\Core\Rule\AbstractRuleTraceable;
 
-class Repetition extends AbstractRule
+class Repetition extends AbstractRuleTraceable
 {
-    /** @var bool */
-    protected static $alreadyCalled;
-
     public static function getPattern(): string
     {
-        if (!static::$alreadyCalled) {
-            static::$alreadyCalled = true;
+        if (!static::isAlreadyCalled()) {
+            static::traceCallOnce();
             $regex = "(?'repetition'" . Repeat::getPattern() . '?' . Element::getPattern() . ')';
-            static::$alreadyCalled = false;
+            static::unTrace();
 
             return $regex;
         }

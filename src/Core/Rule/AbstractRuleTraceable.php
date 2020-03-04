@@ -13,7 +13,7 @@ use RFC5234\Exception\PatternMatchException;
 use RFC5234\Helper\RegexHelper;
 
 /**
- * Class AbstractRule
+ * Class AbstractRuleTraceable
  * @package RFC5234\Core\Rule
  * @internal
  */

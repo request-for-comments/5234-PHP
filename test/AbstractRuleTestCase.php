@@ -69,4 +69,23 @@ class AbstractRuleTestCase extends TestCase
             );
         }
     }
+
+    protected function initMoreThanOneGoodIsBadSetWithGoodSet()
+    {
+        $set = [];
+
+        for ($i = 1; $i < count($this->goodValueSet); $i = $i+2) {
+            $set[] = $this->goodValueSet[$i - 1] . $this->goodValueSet[$i];
+        }
+
+        for ($i = 2; $i < count($this->goodValueSet); $i = $i+3) {
+            $set[] = $this->goodValueSet[$i - 2] . $this->goodValueSet[$i - 1] . $this->goodValueSet[$i];
+        }
+
+        for ($i = 1; $i < count($this->goodValueSet); $i++) {
+            $set[] = $this->goodValueSet[$i] . $this->goodValueSet[$i] . $this->goodValueSet[$i] . $this->goodValueSet[$i];
+        }
+
+        $this->moreThanOneGoodIsBadSet = $set;
+    }
 }

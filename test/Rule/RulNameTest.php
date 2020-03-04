@@ -8,21 +8,21 @@
 
 namespace RFC5234\Test\Rule;
 
-use RFC5234\Rule\DecVal;
+use RFC5234\Rule\RuleName;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class DecValTest extends AbstractRuleTestCase
+class RulNameTest extends AbstractRuleTestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->testedRule = DecVal::class;
+        $this->testedRule = RuleName::class;
         $this->goodValueSet = [
-            'd0', 'd1', 'd111', 'd01.0', 'd010.00100', 'd010.001.00', 'd01-00100', 'd01000-100', 'd0-0',
+            'a', 'dz', 'dzzz', 'd-a-1', 'd----', 'fff-fff-111', 'a1a11e1e1fez515fez-',
         ];
         $this->badValueSet = [
-            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^', 'd010.001-00', 'd01-001-00',
+            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^', 'b010.001-00',
         ];
-        $this->initMoreThanOneGoodIsBadSetWithGoodSet();
+        $this->moreThanOneGoodIsBadSet = null; //impossible cause double rulename looks like a rulename
     }
 }

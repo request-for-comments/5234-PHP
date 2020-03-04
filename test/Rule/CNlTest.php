@@ -8,20 +8,26 @@
 
 namespace RFC5234\Test\Rule;
 
-use RFC5234\Rule\DecVal;
+use RFC5234\Rule\CNl;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class DecValTest extends AbstractRuleTestCase
+class CNlTest extends AbstractRuleTestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->testedRule = DecVal::class;
+        $this->testedRule = CNl::class;
         $this->goodValueSet = [
-            'd0', 'd1', 'd111', 'd01.0', 'd010.00100', 'd010.001.00', 'd01-00100', 'd01000-100', 'd0-0',
+            "; quoted string of SP and VCHAR\r\n",
+            "; series of concatenated bit values\r\n",
+            ";  without angles\r\n",
+            ";  without DQUOTE\r\n",
+            ";\r\n",
+            "\r\n",
         ];
         $this->badValueSet = [
-            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^', 'd010.001-00', 'd01-001-00',
+            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^', 'b010.001-00', 'b01-001-00',
+            "; series of concatenated bit values", "; series of concatenated bit values\n", "\n",
         ];
         $this->initMoreThanOneGoodIsBadSetWithGoodSet();
     }

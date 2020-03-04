@@ -24,8 +24,6 @@ class HexValTest extends AbstractRuleTestCase
         $this->badValueSet = [
             'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^', 'x0A0.00B-00', 'x01-0C1-00', 'x010.C01.0G'
         ];
-        $this->moreThanOneGoodIsBadSet = [
-            'x0A010x01A10', 'x0F0.00100x010.001A0', 'x01-001E0x01.00100',
-        ];
+        $this->initMoreThanOneGoodIsBadSetWithGoodSet();
     }
 }

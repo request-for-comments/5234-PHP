@@ -26,9 +26,6 @@ class NumValTest extends AbstractRuleTestCase
         $this->badValueSet = [
             'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^', 'b010.001-00', 'b01-001-00',
         ];
-        $this->moreThanOneGoodIsBadSet = [
-            '%'.$this->goodValueSet[0].$this->goodValueSet[1],
-            '%'.$this->goodValueSet[2].$this->goodValueSet[3].$this->goodValueSet[4],
-        ];
+        $this->initMoreThanOneGoodIsBadSetWithGoodSet();
     }
 }

@@ -66,10 +66,6 @@ class CharValTest extends AbstractRuleTestCase
         $this->badValueSet = [
             "''", "\x22\x22\x22", '!', '1', '¡', '§', '*', 'ù', '^', 'b010.001-00', 'b01-001-00',
         ];
-        $this->moreThanOneGoodIsBadSet = [
-            $this->getRandomValidString().$this->getRandomValidString(),
-            $this->getRandomValidString().$this->getRandomValidString().$this->getRandomValidString(),
-            $this->getRandomValidString().$this->getRandomValidString().$this->getRandomValidString().$this->getRandomValidString(),
-        ];
+        $this->initMoreThanOneGoodIsBadSetWithGoodSet();
     }
 }

@@ -28,10 +28,6 @@ class CommentTest extends AbstractRuleTestCase
             'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^', 'b010.001-00', 'b01-001-00',
             "; series of concatenated bit values", "; series of concatenated bit values\n"
         ];
-        $this->moreThanOneGoodIsBadSet = [
-            "; series of concatenated bit values\r\n; series of concatenated bit values\r\n",
-            ";\r\n;\r\n",
-            ";\r\n;\r\n;\r\n",
-        ];
+        $this->initMoreThanOneGoodIsBadSetWithGoodSet();
     }
 }

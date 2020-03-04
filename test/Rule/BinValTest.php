@@ -23,8 +23,6 @@ class BinValTest extends AbstractRuleTestCase
         $this->badValueSet = [
             'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^', 'b010.001-00', 'b01-001-00',
         ];
-        $this->moreThanOneGoodIsBadSet = [
-            'b01010b01010', 'b010.00100b010.00100', 'b01-00100b01.00100',
-        ];
+        $this->initMoreThanOneGoodIsBadSetWithGoodSet();
     }
 }

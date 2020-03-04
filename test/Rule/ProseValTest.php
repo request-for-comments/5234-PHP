@@ -65,8 +65,6 @@ class ProseValTest extends AbstractRuleTestCase
         $this->badValueSet = [
             'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^', 'b010.001-00', 'b01-001-00',
         ];
-        $this->moreThanOneGoodIsBadSet = [
-            '<><>', '<><><>', '<><><><>',
-        ];
+        $this->initMoreThanOneGoodIsBadSetWithGoodSet();
     }
 }

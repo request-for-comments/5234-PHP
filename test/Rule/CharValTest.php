@@ -23,7 +23,7 @@ class CharValTest extends AbstractRuleTestCase
             foreach ($run as $last) {
                 $dec = hexdec($first.$last);
 
-                if ($dec < 32 || $dec > 126 || $dec === 34) {
+                if ($dec < 32 || $dec > 126 || 34 === $dec) {
                     continue;
                 }
 

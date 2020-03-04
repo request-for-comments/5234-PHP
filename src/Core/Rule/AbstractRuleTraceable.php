@@ -20,6 +20,7 @@ use RFC5234\Helper\RegexHelper;
 abstract class AbstractRuleTraceable implements RuleInterface
 {
     private $value;
+    /** @var string[] */
     protected static $trace = [];
 
     public function __construct(string $value)
@@ -45,7 +46,7 @@ abstract class AbstractRuleTraceable implements RuleInterface
         return in_array(static::class, static::$trace);
     }
 
-    protected static function unTrace()
+    protected static function unTrace(): void
     {
         if (static::class === static::$trace[0] ?? null) {
             static::$trace = [];

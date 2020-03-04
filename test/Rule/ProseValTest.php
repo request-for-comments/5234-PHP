@@ -8,22 +8,21 @@
 
 namespace RFC5234\Test\Rule;
 
-use RFC5234\Rule\BinVal;
-use RFC5234\Rule\CharVal;
+use RFC5234\Rule\ProseVal;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class CharValTest extends AbstractRuleTestCase
+class ProseValTest extends AbstractRuleTestCase
 {
     private function getCharInValidRange(): string
     {
-        $rand = mt_rand(0, 93);
+        $rand = mt_rand(0, 92);
         $run = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
 
         foreach ($run as $first) {
             foreach ($run as $last) {
                 $dec = hexdec($first.$last);
 
-                if ($dec < 32 || $dec > 126 || 34 === $dec) {
+                if ($dec < 32 || $dec > 126 || 62 === $dec) {
                     continue;
                 }
 
@@ -46,15 +45,15 @@ class CharValTest extends AbstractRuleTestCase
             $str .= $this->getCharInValidRange();
         }
 
-        return "\x22" . $str . "\x22";
+        return '<' . $str . '>';
     }
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->testedRule = CharVal::class;
+        $this->testedRule = ProseVal::class;
         $this->goodValueSet = (function () {
-            $set = ['""'];
+            $set = ['<>'];
             $i = 50;
 
             while ($i--) {
@@ -64,12 +63,10 @@ class CharValTest extends AbstractRuleTestCase
             return $set;
         })();
         $this->badValueSet = [
-            "''", "\x22\x22\x22", '!', '1', '¡', '§', '*', 'ù', '^', 'b010.001-00', 'b01-001-00',
+            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^', 'b010.001-00', 'b01-001-00',
         ];
         $this->moreThanOneGoodIsBadSet = [
-            $this->getRandomValidString().$this->getRandomValidString(),
-            $this->getRandomValidString().$this->getRandomValidString().$this->getRandomValidString(),
-            $this->getRandomValidString().$this->getRandomValidString().$this->getRandomValidString().$this->getRandomValidString(),
+            '<><>', '<><><>', '<><><><>',
         ];
     }
 }

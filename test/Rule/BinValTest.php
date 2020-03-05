@@ -6,26 +6,23 @@
  * @link https://github.com/request-for-comments/5234-PHP/blob/master/README.md
  */
 
-namespace RFC5234\Test\Core\Rule;
+namespace RFC5234\Test\Rule;
 
-use RFC5234\Core\Rule\Alpha;
+use RFC5234\Rule\BinVal;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class AlphaTest extends AbstractRuleTestCase
+class BinValTest extends AbstractRuleTestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->testedRule = Alpha::class;
+        $this->testedRule = BinVal::class;
         $this->goodValueSet = [
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+            'b0', 'b1', 'b01010', 'b01.0', 'b010.00100', 'b010.001.00', 'b01-00100', 'b01000-100', 'b0-0',
         ];
         $this->badValueSet = [
-            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^'
+            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^', 'b010.001-00', 'b01-001-00',
         ];
-        $this->moreThanOneGoodIsBadSet = [
-            'aa', 'ab', 'abc'
-        ];
+        $this->initMoreThanOneGoodIsBadSetWithGoodSet();
     }
 }

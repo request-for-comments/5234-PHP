@@ -8,24 +8,23 @@
 
 namespace RFC5234\Test\Core\Rule;
 
-use RFC5234\Core\Rule\Alpha;
+use RFC5234\Core\Rule\HTab;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class AlphaTest extends AbstractRuleTestCase
+class HTabTest extends AbstractRuleTestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->testedRule = Alpha::class;
+        $this->testedRule = HTab::class;
         $this->goodValueSet = [
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+            "\t",
         ];
         $this->badValueSet = [
-            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^'
+            'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ', 'a', '3'
         ];
         $this->moreThanOneGoodIsBadSet = [
-            'aa', 'ab', 'abc'
+            "\t\t",
         ];
     }
 }

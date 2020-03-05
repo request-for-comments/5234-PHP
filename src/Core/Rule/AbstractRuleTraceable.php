@@ -13,36 +13,48 @@ use RFC5234\Exception\PatternMatchException;
 use RFC5234\Helper\RegexHelper;
 
 /**
- * Class AbstractRule
+ * Class AbstractRuleTraceable
  * @package RFC5234\Core\Rule
  * @internal
  */
-abstract class AbstractRule implements RuleInterface
+abstract class AbstractRuleTraceable implements RuleInterface
 {
     private $value;
+    /** @var string[] */
+    protected static $trace = [];
 
     public function __construct(string $value)
     {
         $rh = RegexHelper::prepare($this->getPattern());
         if (!$rh->pregMatch($value)) {
-            throw new PatternMatchException($value, static::getPattern());
+            throw new PatternMatchException($value, $this->getPattern());
         }
         $this->value = $value;
     }
 
     abstract public static function getPattern(): string;
 
+    protected static function traceCallOnce(): void
+    {
+        if (!self::isAlreadyCalled()) {
+            static::$trace[] = static::class;
+        }
+    }
+
+    protected static function isAlreadyCalled(): bool
+    {
+        return in_array(static::class, static::$trace);
+    }
+
+    protected static function unTrace(): void
+    {
+        if (static::class === static::$trace[0] ?? null) {
+            static::$trace = [];
+        }
+    }
+
     public function getValue(): string
     {
         return $this->value;
-    }
-
-    /**
-     * Shortcut for static::getPattern()
-     * @return string
-     */
-    public static function P(): string
-    {
-        return static::getPattern();
     }
 }

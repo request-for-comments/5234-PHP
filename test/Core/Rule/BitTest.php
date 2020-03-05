@@ -13,17 +13,17 @@ use RFC5234\Test\AbstractRuleTestCase;
 
 class BitTest extends AbstractRuleTestCase
 {
-    public static function setUpBeforeClass(): void
+    public function setUp(): void
     {
-        parent::setUpBeforeClass();
-        static::$testedRule = Bit::class;
-        static::$goodValueSet = [
+        parent::setUp();
+        $this->testedRule = Bit::class;
+        $this->goodValueSet = [
             '0', '1',
         ];
-        static::$badValueSet = [
+        $this->badValueSet = [
             'é', 'ù', '!', '4', '¡', '2', '*', 'ù', 'a'
         ];
-        static::$moreThanOnceGoodSet = [
+        $this->moreThanOneGoodIsBadSet = [
             '00', '01', '10', '11'
         ];
     }

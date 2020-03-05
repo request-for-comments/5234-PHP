@@ -8,24 +8,23 @@
 
 namespace RFC5234\Test\Core\Rule;
 
-use RFC5234\Core\Rule\Alpha;
+use RFC5234\Core\Rule\WSP;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class AlphaTest extends AbstractRuleTestCase
+class WSPTest extends AbstractRuleTestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->testedRule = Alpha::class;
-        $this->goodValueSet = [
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-        ];
+        ($dt = new SPTest())->setUp();
+        ($ht = new HTabTest())->setUp();
+        $this->testedRule = WSP::class;
+        $this->goodValueSet = array_merge($dt->goodValueSet, $ht->goodValueSet);
         $this->badValueSet = [
-            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^'
+            'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
         ];
         $this->moreThanOneGoodIsBadSet = [
-            'aa', 'ab', 'abc'
+            " \t", "   ", "\t\t\t\t", " \t \t",
         ];
     }
 }

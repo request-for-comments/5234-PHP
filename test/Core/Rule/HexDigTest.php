@@ -8,24 +8,24 @@
 
 namespace RFC5234\Test\Core\Rule;
 
-use RFC5234\Core\Rule\Alpha;
+use RFC5234\Core\Rule\HexDig;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class AlphaTest extends AbstractRuleTestCase
+class HexDigTest extends AbstractRuleTestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->testedRule = Alpha::class;
-        $this->goodValueSet = [
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-        ];
+        ($dt = new DigitTest())->setUp();
+        $this->testedRule = HexDig::class;
+        $this->goodValueSet = array_merge($dt->goodValueSet, [
+            'A', 'B', 'C', 'D', 'E', 'F',
+        ]);
         $this->badValueSet = [
-            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^'
+            'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
         ];
         $this->moreThanOneGoodIsBadSet = [
-            'aa', 'ab', 'abc'
+            '01', '1A', 'FF', '0A', 'BDF',
         ];
     }
 }

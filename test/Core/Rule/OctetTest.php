@@ -8,23 +8,32 @@
 
 namespace RFC5234\Test\Core\Rule;
 
-use RFC5234\Core\Rule\CR;
+use RFC5234\Core\Rule\Octet;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class CRTest extends AbstractRuleTestCase
+class OctetTest extends AbstractRuleTestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->testedRule = CR::class;
-        $this->goodValueSet = [
-            "\r",
-        ];
+        $this->testedRule = Octet::class;
+        $this->goodValueSet = (function () {
+            $set = [];
+            $run = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+
+            foreach ($run as $first) {
+                foreach ($run as $last) {
+                    $set[] = pack('H*', $first.$last);
+                }
+            }
+
+            return $set;
+        })();
         $this->badValueSet = [
             'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ',
         ];
         $this->moreThanOneGoodIsBadSet = [
-            "\r\r",
+            "\x00\x00", "\xFF\x00", "\x01\xA1\x5F",
         ];
     }
 }

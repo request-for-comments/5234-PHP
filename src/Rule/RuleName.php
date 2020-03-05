@@ -6,13 +6,17 @@
  * @link https://github.com/request-for-comments/5234-PHP/blob/master/README.md
  */
 
-namespace RFC5234\Core\Rule;
+namespace RFC5234\Rule;
 
 
-class VChar extends AbstractRule
+use RFC5234\Core\Rule\AbstractRule;
+use RFC5234\Core\Rule\Alpha;
+use RFC5234\Core\Rule\Digit;
+
+class RuleName extends AbstractRule
 {
     public static function getPattern(): string
     {
-        return '[\x21-\x7E]';
+        return '(?:' . Alpha::getPattern() . '(?:' . Alpha::getPattern() . '|' . Digit::getPattern() . '|-)*)';
     }
 }

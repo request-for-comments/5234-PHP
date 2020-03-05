@@ -8,24 +8,26 @@
 
 namespace RFC5234\Test\Core\Rule;
 
-use RFC5234\Core\Rule\Alpha;
+use RFC5234\Core\Rule\LF;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class AlphaTest extends AbstractRuleTestCase
+class LFTest extends AbstractRuleTestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->testedRule = Alpha::class;
+        $this->testedRule = LF::class;
         $this->goodValueSet = [
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+            "\n",
         ];
         $this->badValueSet = [
-            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^'
+            'é', 'ù', '¡', '°', '§', '£', 'ù', 'µ', 'a', '3', "\t", ' '
         ];
         $this->moreThanOneGoodIsBadSet = [
-            'aa', 'ab', 'abc'
+            "\n\n\n\n\n",
+            "\n\n\n\n",
+            "\n\n\n",
+//            "\n\n", // Should not match => PCRE Bug @see https://bugs.exim.org/show_bug.cgi?id=2536
         ];
     }
 }

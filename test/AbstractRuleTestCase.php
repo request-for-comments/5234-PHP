@@ -70,22 +70,56 @@ class AbstractRuleTestCase extends TestCase
         }
     }
 
-    protected function initMoreThanOneGoodIsBadSetWithGoodSet()
+    protected function initMoreThanOneGoodIsBadSetWithGoodSet(array $filter = [])
     {
+        $goodSet = array_values(array_diff($this->goodValueSet, $filter));
+
         $set = [];
 
-        for ($i = 1; $i < count($this->goodValueSet); $i = $i+2) {
-            $set[] = $this->goodValueSet[$i - 1] . $this->goodValueSet[$i];
+        for ($i = 1; $i < count($goodSet); $i = $i+2) {
+            $set[] = $goodSet[$i - 1] . $goodSet[$i];
         }
 
-        for ($i = 2; $i < count($this->goodValueSet); $i = $i+3) {
-            $set[] = $this->goodValueSet[$i - 2] . $this->goodValueSet[$i - 1] . $this->goodValueSet[$i];
+        for ($i = 2; $i < count($goodSet); $i = $i+3) {
+            $set[] = $goodSet[$i - 2] . $goodSet[$i - 1] . $goodSet[$i];
         }
 
-        for ($i = 1; $i < count($this->goodValueSet); $i++) {
-            $set[] = $this->goodValueSet[$i] . $this->goodValueSet[$i] . $this->goodValueSet[$i] . $this->goodValueSet[$i];
+        for ($i = 1; $i < count($goodSet); $i++) {
+            $set[] = $goodSet[$i] . $goodSet[$i] . $goodSet[$i] . $goodSet[$i];
         }
 
         $this->moreThanOneGoodIsBadSet = $set;
+    }
+
+    public function getNumberOfRetries(): int
+    {
+        $annotations = $this->getAnnotations();
+        foreach ($annotations as $annotation) {
+            if (empty($annotation)) {
+                continue;
+            }
+            if (key_exists('retry', $annotation)) {
+                return (int) ($annotation['retry'][0] ?? 0);
+            }
+        }
+
+        return 0;
+    }
+
+    public function runBare(): void
+    {
+        $retryCount = $this->getNumberOfRetries() + 1;
+        $e = null;
+        for ($i = 0; $i < $retryCount; $i++) {
+            try {
+                parent::runBare();
+                return;
+            }
+            catch (\Throwable $e) {
+            }
+        }
+        if ($e) {
+            throw $e;
+        }
     }
 }

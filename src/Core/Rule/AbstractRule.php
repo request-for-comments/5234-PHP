@@ -25,7 +25,7 @@ abstract class AbstractRule implements RuleInterface
     {
         $rh = RegexHelper::prepare($this->getPattern());
         if (!$rh->pregMatch($value)) {
-            throw new PatternMatchException($value, $this->getPattern());
+            throw new PatternMatchException($value, static::getPattern());
         }
         $this->value = $value;
     }
@@ -35,5 +35,14 @@ abstract class AbstractRule implements RuleInterface
     public function getValue(): string
     {
         return $this->value;
+    }
+
+    /**
+     * Shortcut for static::getPattern()
+     * @return string
+     */
+    public static function P(): string
+    {
+        return static::getPattern();
     }
 }

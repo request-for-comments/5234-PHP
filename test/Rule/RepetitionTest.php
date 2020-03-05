@@ -19,11 +19,13 @@ class RepetitionTest extends AbstractRuleTestCase
         parent::setUp();
         $this->testedRule = Repetition::class;
         $this->goodValueSet = [
-            '*c-wsp', '1*c-wsp', '*4c-wsp', '3*57c-wsp',
+            '*c-wsp', '1*c-wsp', '*4c-wsp', '3*57c-wsp', 'c-wsp',
+            '*(c-wsp / test / coooool)', '1*(c-wsp / test)', '*4(c-wsp / test)', '3*57(c-wsp / test)', '(c-wsp / test)',
+            '*[c-wsp / test]', '1*[c-wsp / test]', '*4[c-wsp / test]', '3*57[c-wsp / testing]', '[c-wsp / test]',
         ];
         $this->badValueSet = [
-            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^', 'b010.001-00', 'b01-001-00',
+            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^',
         ];
-        $this->initMoreThanOneGoodIsBadSetWithGoodSet();
+        $this->initMoreThanOneGoodIsBadSetWithGoodSet(['c-wsp']);
     }
 }

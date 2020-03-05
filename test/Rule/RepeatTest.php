@@ -8,21 +8,21 @@
 
 namespace RFC5234\Test\Rule;
 
-use RFC5234\Rule\RuleName;
+use RFC5234\Rule\Repeat;
 use RFC5234\Test\AbstractRuleTestCase;
 
-class RulNameTest extends AbstractRuleTestCase
+class RepeatTest extends AbstractRuleTestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->testedRule = RuleName::class;
+        $this->testedRule = Repeat::class;
         $this->goodValueSet = [
-            'a', 'dz', 'dzzz', 'd-a-1', 'd----', 'fff-fff-111', 'a1a11e1e1fez515fez-',
+            '5', '1', '34', '42*7415', '0*1547', '124*', '*1', '1*', '*5989', '4888*5989', '*',
         ];
         $this->badValueSet = [
-            'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^', 'b010.001-00',
+            'é', 'ù', '!', '¡', '§', 'ù', '^', 'b010.001-00', 'b01-001-00', '',
         ];
-        $this->moreThanOneGoodIsBadSet = null; //impossible cause double rulename looks like a rulename
+        $this->initMoreThanOneGoodIsBadSetWithGoodSet(['5', '1', '34',]);
     }
 }

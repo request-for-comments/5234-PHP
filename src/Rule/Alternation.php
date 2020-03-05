@@ -17,8 +17,8 @@ class Alternation extends AbstractRuleTraceable
     {
         if (!static::isAlreadyCalled()) {
             static::traceCallOnce();
-            $regex = "(?'alternation'" . Repetition::getPattern() . '(?:' . CWSP::getPattern() . '+' .
-                Repetition::getPattern() . ')*)'
+            $regex = "(?'alternation'" . Concatenation::getPattern() . '(?:' . CWSP::getPattern() . '*/' .
+                CWSP::getPattern() . '*' . Concatenation::getPattern() . ')*)'
             ;
             static::unTrace();
 

@@ -28,7 +28,6 @@ class RuleTest extends AbstractRuleTestCase
 
     public function setUp(): void
     {
-//        return '(?:' . RuleName::getPattern() . DefinedAs::getPattern() . Elements::getPattern() . CNl::getPattern() . ')';
         parent::setUp();
         ($rut = new RuleNameTest())->setUp();
         ($det = new DefinedAsTest())->setUp();
@@ -54,7 +53,7 @@ class RuleTest extends AbstractRuleTestCase
             }
 
             shuffle($set);
-            $set = array_slice($set, 0, 2500);
+            $set = array_slice($set, 0, 10000);
 
             return $set;
         })();
@@ -62,5 +61,13 @@ class RuleTest extends AbstractRuleTestCase
             'é', 'ù', '!', '1', '¡', '§', '*', 'ù', '^',
         ];
         $this->initMoreThanOneGoodIsBadSetWithGoodSet();
+    }
+
+    /**
+     * @retry 15
+     */
+    public function test that match with any good value()
+    {
+        parent::test that match with any good value();
     }
 }

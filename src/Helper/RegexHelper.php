@@ -8,13 +8,15 @@
 
 namespace RFC5234\Helper;
 
+use RFC5234\Exception\RegexHelperException;
+
 class RegexHelper
 {
     public const NO_ANCHORS = 0;
     public const START_ANCHOR = 2;
     public const END_ANCHOR = 4;
+    public const DELIMITER = '#';
 
-    private const DELIMITER = '#';
     /** @var string */
     private $regex;
 
@@ -22,7 +24,7 @@ class RegexHelper
      * RegexHelper constructor.
      * @param string $pattern
      * @param int $anchors
-     * @throws \Exception
+     * @throws RegexHelperException
      */
     private function __construct(string $pattern, int $anchors)
     {
@@ -43,7 +45,7 @@ class RegexHelper
             return;
         }
 
-        throw new \Exception('Anchors is badly defined');
+        throw new RegexHelperException('Anchors is badly defined');
     }
 
     private function escapePatternWithDelimiter(string $pattern): string
@@ -55,7 +57,7 @@ class RegexHelper
      * @param string $pattern
      * @param int $anchors
      * @return RegexHelper
-     * @throws \Exception
+     * @throws RegexHelperException
      */
     public static function prepare(string $pattern, int $anchors = self::START_ANCHOR | self::END_ANCHOR): RegexHelper
     {
@@ -71,7 +73,7 @@ class RegexHelper
     {
         $matches = [];
 
-        return !!preg_match($this->regex, $stringToEvaluate, $matches);
+        return !!@preg_match($this->regex, $stringToEvaluate, $matches);
     }
 
     /**
@@ -83,6 +85,11 @@ class RegexHelper
     {
         $matches = [];
 
-        return !!preg_match_all($this->regex, $stringToEvaluate, $matches);
+        return !!@preg_match_all($this->regex, $stringToEvaluate, $matches);
+    }
+
+    public function getRegex(): string
+    {
+        return $this->regex;
     }
 }

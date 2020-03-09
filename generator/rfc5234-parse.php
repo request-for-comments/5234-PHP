@@ -23,4 +23,6 @@ $regex = \RFC5234\Helper\RegexHelper::prepare('(' . \RFC5234\Rule\Rule::getPatte
 
 $regex->pregMatchAll($doc, $matches);
 
-dump($matches[0]);
+$rules = \RFC5234\Rule\Rule::getAllIn($doc);
+
+dump($rules);

@@ -9,7 +9,7 @@
 namespace RFC5234\Exception;
 
 
-use PHPUnit\Framework\Exception;
+use Exception;
 
 class PatternMatchException extends Exception
 {

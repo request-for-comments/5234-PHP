@@ -6,6 +6,8 @@
  * @link https://github.com/request-for-comments/5234-PHP/blob/master/README.md
  */
 
+use RFC5234\Helper\RegexHelper;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $ruleInterfaceClasses = [];
@@ -61,10 +63,10 @@ foreach ($dir as $fileInfo) {
 $generated = '';
 
 foreach ($ruleInterfaceClasses as $class) {
-//    if ($class === "\RFC5234\Rule\Repetition") {
-    if (true) {
-        $generated .= $class . ' = ' . $class::getPattern() . "\n\n";
-    }
+    $fragments = explode('\\', $class);
+    $className = $fragments[count($fragments) - 1];
+    $generated .=  $className. ' - Regex definition with `' . RegexHelper::DELIMITER . '` as delimiter :' . "\n";
+    $generated .=  RegexHelper::prepare($class::getPattern())->getRegex() . "\n\n";
 }
 
 echo $generated;

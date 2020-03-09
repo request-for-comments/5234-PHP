@@ -46,7 +46,7 @@ class RuleTest extends AbstractRuleTestCase
                 foreach ($setsToHappen[0] as $define) {
                     foreach ($setsToHappen[1] as $elements) {
                         foreach ($setsToHappen[2] as $cnl) {
-                            if (rand(0, 10000) < 50) {
+                            if (rand(0, 10000) < 40) {
                                 $set[] = $base.$define.$elements.$cnl;
                             }
                         }

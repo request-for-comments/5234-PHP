@@ -10,6 +10,7 @@ namespace RFC5234\Core\Rule;
 
 
 use RFC5234\Exception\PatternMatchException;
+use RFC5234\Exception\RegexHelperException;
 use RFC5234\Helper\RegexHelper;
 
 /**
@@ -19,15 +20,41 @@ use RFC5234\Helper\RegexHelper;
  */
 abstract class AbstractRule implements RuleInterface
 {
+    /** @var string  */
     protected $value;
 
-    public function __construct(string $value)
+    /**
+     * AbstractRule constructor.
+     * @param string $value
+     * @throws PatternMatchException
+     * @throws RegexHelperException
+     */
+    final public function __construct(string $value)
     {
-        $rh = RegexHelper::prepare($this->getPattern());
+        $rh = RegexHelper::prepare(static::getPattern());
         if (!$rh->pregMatch($value)) {
             throw new PatternMatchException($value, static::getPattern());
         }
         $this->value = $value;
+    }
+
+    /**
+     * @param string $string
+     * @return static[]
+     * @throws PatternMatchException
+     * @throws RegexHelperException
+     */
+    public static function getAllIn(string $string): array
+    {
+        $rh = RegexHelper::prepare(static::getPattern(), RegexHelper::NO_ANCHORS);
+        $rh->pregMatchAll($string, $matches);
+
+        $statics = [];
+        foreach ($matches[0] as $match) {
+            $statics[] = new static($match);
+        }
+
+        return $statics;
     }
 
     abstract public static function getPattern(): string;

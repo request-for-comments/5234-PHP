@@ -17,22 +17,10 @@ use RFC5234\Helper\RegexHelper;
  * @package RFC5234\Core\Rule
  * @internal
  */
-abstract class AbstractRuleTraceable implements RuleInterface
+abstract class AbstractRuleTraceable extends AbstractRule
 {
-    private $value;
     /** @var string[] */
     protected static $trace = [];
-
-    public function __construct(string $value)
-    {
-        $rh = RegexHelper::prepare($this->getPattern());
-        if (!$rh->pregMatch($value)) {
-            throw new PatternMatchException($value, $this->getPattern());
-        }
-        $this->value = $value;
-    }
-
-    abstract public static function getPattern(): string;
 
     protected static function traceCallOnce(): void
     {
@@ -51,10 +39,5 @@ abstract class AbstractRuleTraceable implements RuleInterface
         if (static::class === static::$trace[0] ?? null) {
             static::$trace = [];
         }
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
     }
 }

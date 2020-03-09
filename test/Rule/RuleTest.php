@@ -46,14 +46,13 @@ class RuleTest extends AbstractRuleTestCase
                 foreach ($setsToHappen[0] as $define) {
                     foreach ($setsToHappen[1] as $elements) {
                         foreach ($setsToHappen[2] as $cnl) {
-                            $set[] = $base.$define.$elements.$cnl;
+                            if (rand(0, 10000) < 50) {
+                                $set[] = $base.$define.$elements.$cnl;
+                            }
                         }
                     }
                 }
             }
-
-            shuffle($set);
-            $set = array_slice($set, 0, 10000);
 
             return $set;
         })();

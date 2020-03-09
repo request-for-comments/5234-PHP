@@ -18,6 +18,6 @@ class Comment extends AbstractRule
 {
     public static function getPattern(): string
     {
-        return '(?:;(?:' . WSP::getPattern() . '|' . VChar::getPattern() . ')*' . CRLF::getPattern() . ')';
+        return '(?:;[\x20\x09\x21-\x7E]*' . CRLF::getPattern() . ')';
     }
 }

@@ -19,7 +19,7 @@ use RFC5234\Helper\RegexHelper;
  */
 abstract class AbstractRule implements RuleInterface
 {
-    private $value;
+    protected $value;
 
     public function __construct(string $value)
     {

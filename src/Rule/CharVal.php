@@ -16,6 +16,6 @@ class CharVal extends AbstractRule
 {
     public static function getPattern(): string
     {
-        return '(?:' . DQuote::getPattern() . '(?:[\x20-\x21]|[\x23-\x7E])*' . DQuote::getPattern() . ')';
+        return '(?:' . DQuote::getPattern() . '[\x20-\x21\x23-\x7E]*' . DQuote::getPattern() . ')';
     }
 }

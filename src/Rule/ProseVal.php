@@ -15,6 +15,6 @@ class ProseVal extends AbstractRule
 {
     public static function getPattern(): string
     {
-        return '(?:<(?:[\x20-\x3D]|[\x3F-\x7E])*>)';
+        return '(?:<[\x20-\x3D\x3F-\x7E]*>)';
     }
 }

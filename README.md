@@ -1,6 +1,6 @@
-#RFC 5234 - Augmented BNF for Syntax Specifications: ABNF - PHP Rules implementation 
+# RFC 5234 - Augmented BNF for Syntax Specifications: ABNF - PHP Rules implementation 
 
-##Use Case
+## Use Case
 
 ```php
 <?php
@@ -18,7 +18,7 @@ Char::getPattern(); // return [\x01-\x7F]
 All patterns are returned as numerable pattern fragment, so, doing something like this:
 - Alpha::getPattern() . '{1,3}'; make pattern that match 1 to 3 Alpha
 
-##Rule validation
+## Rule validation
 
 ```php
 <?php
@@ -29,9 +29,26 @@ use RFC5234\Core\Rule\Bit;
 new Alpha($mustBeAnAlpha); // Return Alpha or throw an exception on invalid data
 new Bit($mustBeAbit); // Return Bit or throw an exception on invalid data
 ```
+
+## Find all in ... say so ... an RFC document
+
+```php
+<?php
+
+use RFC5234\Core\Rule\Alpha;
+use RFC5234\Core\Rule\Bit;
+use RFC5234\Rule\Rule;
+
+Alpha::getAllIn($RFCDoc); // Return all Alpha or an empty array if found nothing
+Bit::getAllIn($RFCDoc); // Return all Bit or an empty array if found nothing
+
+// And the mostly useful of it
+
+Rule::getAllIn($RFCDoc); // Return all Rule or an empty array if found nothing
+```
 ... etc
 
-##RFC 5234 description
+## RFC 5234 description
 
 ```text
 Network Working Group                                    D. Crocker, Ed.

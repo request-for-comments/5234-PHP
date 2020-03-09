@@ -13,6 +13,6 @@ class Alpha extends AbstractRule
 {
     public static function getPattern(): string
     {
-        return '(?:[\x41-\x5A]|[\x61-\x7A])';
+        return '(?:[\x41-\x5A\x61-\x7A])';
     }
 }

@@ -13,6 +13,6 @@ class WSP extends AbstractRule
 {
     public static function getPattern(): string
     {
-        return '(?:' . SP::getPattern() . '|' . HTab::getPattern() . ')';
+        return '[\x20\x09]';
     }
 }

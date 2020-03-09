@@ -13,6 +13,6 @@ class CTL extends AbstractRule
 {
     public static function getPattern(): string
     {
-        return '(?:[\x00-\x1F]|\x7F)';
+        return '[\x00-\x1F\x7F]';
     }
 }

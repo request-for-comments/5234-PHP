@@ -13,6 +13,6 @@ class HexDig extends AbstractRule
 {
     public static function getPattern(): string
     {
-        return '(?:' . Digit::getPattern() . '|[A-F])';
+        return '[0-9A-F]';
     }
 }
